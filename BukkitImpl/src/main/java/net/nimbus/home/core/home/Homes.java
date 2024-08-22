@@ -46,9 +46,9 @@ public class Homes {
         map.put(uuid, homes);
     }
 
-    public static void save(UUID uuid) {
+    public static boolean save(UUID uuid) {
         String save = map.getOrDefault(uuid, new HashMap<>()).values().stream().map(Object::toString).collect(Collectors.joining(";"));
-        MySQLConnection.set("nh_homes", "uuid", uuid.toString(), "homes", save);
+        return  MySQLConnection.set("nh_homes", "uuid", uuid.toString(), "homes", save);
     }
 
     public static void unload(UUID uuid){

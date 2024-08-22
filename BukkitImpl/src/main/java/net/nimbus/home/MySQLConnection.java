@@ -84,12 +84,15 @@ public class MySQLConnection {
             return new ArrayList<>();
         }
     }
-    public static void set(String table, String key_column, String key_value, String column, String value) {
+    public static boolean set(String table, String key_column, String key_value, String column, String value) {
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM " + table + " WHERE " + key_column + " = '" + key_value + "'");
             st.execute("INSERT INTO " + table + "(" + key_column + ", " + column + ") VALUES ('" + key_value + "', '" + value + "') ON DUPLICATE KEY UPDATE " + column + " = '" + value + "'");
             st.close();
-        } catch (SQLException ignored) {
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
     public static boolean exists(String table, String key_column, String key_value) {

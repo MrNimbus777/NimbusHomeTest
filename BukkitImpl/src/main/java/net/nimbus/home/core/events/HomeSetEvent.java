@@ -1,7 +1,6 @@
 package net.nimbus.home.core.events;
 
 import net.nimbus.home.core.home.HomeLocation;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

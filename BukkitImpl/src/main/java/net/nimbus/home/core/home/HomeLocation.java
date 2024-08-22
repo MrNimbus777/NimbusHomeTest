@@ -1,13 +1,15 @@
 package net.nimbus.home.core.home;
 
+import net.nimbus.home.Utils;
 import net.nimbus.home.core.events.HomeRemoveEvent;
 import net.nimbus.home.core.events.HomeTeleportEvent;
+import net.nimbus.homeapi.Home;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-public class HomeLocation {
+public class HomeLocation implements Home {
     final Player holder;
     Location location;
     final String id;
@@ -17,8 +19,8 @@ public class HomeLocation {
         this.id = id;
     }
 
-    public Location getLocation() {
-        return location;
+    public net.nimbus.homeapi.Location getLocation() {
+        return Utils.adapt(location);
     }
 
     public String getId() {
@@ -36,8 +38,15 @@ public class HomeLocation {
         player.teleport(location);
         return true;
     }
+
+    @Override
     public boolean teleport(){
         return teleport(holder);
+    }
+
+    @Override
+    public boolean save() {
+        return Homes.save(holder.getUniqueId());
     }
 
     public boolean remove(Player initiator){
@@ -47,6 +56,8 @@ public class HomeLocation {
         Homes.unregister(this);
         return true;
     }
+
+    @Override
     public boolean remove(){
         return remove(holder);
     }
