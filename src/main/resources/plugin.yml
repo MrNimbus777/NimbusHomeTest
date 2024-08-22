@@ -1,0 +1,10 @@
+name: NimbusHomeTest
+main: net.nimbus.home.NHome
+version: 1.0
+commands:
+  home:
+    aliases: [h]
+  sethome:
+    aliases: [homeset, sh]
+  delhome:
+    aliases: [homedel, dh]
